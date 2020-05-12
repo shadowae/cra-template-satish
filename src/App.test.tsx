@@ -1,15 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { shallow } from 'enzyme';
 import App from './App';
-
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-
-  expect(getByText(/learn/i)).toBeInTheDocument();
+import {Route, Switch} from "react-router-dom";
+import {store} from "./app/store";
+import {Counter} from "./features/counter/Counter";
+it('renders contains default route', () => {
+    const wrapper = shallow(<App />);
+    const defaultRoute = <Route store={store} component={Counter} />;
+    // expect(wrapper.contains(welcome)).toBe(true);
+    expect(wrapper.contains(defaultRoute)).toEqual(true);
 });
